@@ -829,6 +829,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1588495080}
+  - component: {fileID: 1588495081}
   m_Layer: 0
   m_Name: VRPaintManager
   m_TagString: Untagged
@@ -851,6 +852,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1588495081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588495079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c1b39b51163cf4589b79b99e7f339d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineWidth: 0.02
+  lineMaterial: {fileID: 2100000, guid: cf592f0324c4ce949bedcbad20c8e46a, type: 2}
+  rightHandController: {fileID: 1598735374}
+--- !u!4 &1598735374 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 657184242222895506, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+  m_PrefabInstance: {fileID: 520788598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1797644908
 PrefabInstance:
   m_ObjectHideFlags: 0
