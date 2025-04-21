@@ -7,35 +7,35 @@ public class BotMove : MonoBehaviour
     private NavMeshAgent navAgent;
     private Animator animator;
 
-    public GameObject losePanel; // Assign your UI panel in the Inspector
+    public GameObject losePanel; // Assign in Inspector
     private bool hasLost = false;
+    private GameObject currentTarget;
+
+    public Material outlineMaterial;
+    private Material originalMaterial;
+    private Renderer animalRenderer;    
 
     void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-
-        StartCoroutine(FollowNearestAnimal());
     }
 
-    IEnumerator FollowNearestAnimal()
+    void Update()
     {
-        while (!hasLost)
+        if (hasLost) return;
+
+        currentTarget = FindNearestAnimal();
+
+        if (currentTarget != null)
         {
-            GameObject nearestAnimal = FindNearestAnimal();
-
-            if (nearestAnimal != null)
-            {
-                navAgent.SetDestination(nearestAnimal.transform.position);
-            }
-
-            yield return new WaitForSeconds(0.2f);
+            navAgent.SetDestination(currentTarget.transform.position);
         }
     }
 
     GameObject FindNearestAnimal()
     {
-        GameObject[] animals = GameObject.FindGameObjectsWithTag("animal");
+        GameObject[] animals = GameObject.FindGameObjectsWithTag("Animal");
         GameObject closest = null;
         float minDistance = Mathf.Infinity;
 
@@ -54,33 +54,42 @@ public class BotMove : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!hasLost && other.CompareTag("animal"))
+        if (!hasLost && other.CompareTag("Animal"))
         {
             hasLost = true;
-
-            // Stop bot
             navAgent.isStopped = true;
 
-            // Play animation
             if (animator != null)
             {
-                animator.SetTrigger("Eat"); // Make sure your Animator has this trigger
+                animator.SetTrigger("Eat"); // Ensure this trigger exists
             }
 
-            // Hide animal
-            Destroy(other.gameObject);
-
-            // Show losing UI after a short delay (for animation)
+            Destroy(other.gameObject); // Animal disappears
             StartCoroutine(ShowLoseUI());
         }
     }
 
     IEnumerator ShowLoseUI()
     {
-        yield return new WaitForSeconds(1.5f); // adjust based on animation length
+        yield return new WaitForSeconds(1.5f); // Animation delay
         if (losePanel != null)
         {
             losePanel.SetActive(true);
         }
     }
+
+    void TargetAnimal(GameObject animal)
+{
+    animalRenderer = animal.GetComponent<Renderer>();
+    originalMaterial = animalRenderer.material;
+    animalRenderer.material = outlineMaterial;
+}
+
+void ClearTarget()
+{
+    if (animalRenderer != null)
+        animalRenderer.material = originalMaterial;
+}
+
+
 }
