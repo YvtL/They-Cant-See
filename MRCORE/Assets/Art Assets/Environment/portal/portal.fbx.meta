@@ -1,105 +1,26 @@
 fileFormatVersion: 2
-guid: 5f9fbe3beb1b52a4d8b2f324eda6ff65
+guid: 1faab7e46c0b1f040bba489aa2826e08
 ModelImporter:
   serializedVersion: 22200
-  internalIDToNameTable:
-  - first:
-      1: 100000
-    second: //RootNode
-  - first:
-      1: 100002
-    second: body
-  - first:
-      1: 100004
-    second: fin.00.L
-  - first:
-      1: 100006
-    second: fin.00.R
-  - first:
-      1: 100008
-    second: fin.01
-  - first:
-      1: 100010
-    second: fin.02
-  - first:
-      1: 100012
-    second: fin.L
-  - first:
-      1: 100014
-    second: fin.R
-  - first:
-      1: 100016
-    second: Mesh
-  - first:
-      1: 100018
-    second: Rig
-  - first:
-      1: 100020
-    second: root
-  - first:
-      1: 100022
-    second: tail.01
-  - first:
-      4: 400000
-    second: //RootNode
-  - first:
-      4: 400002
-    second: body
-  - first:
-      4: 400004
-    second: fin.00.L
-  - first:
-      4: 400006
-    second: fin.00.R
-  - first:
-      4: 400008
-    second: fin.01
-  - first:
-      4: 400010
-    second: fin.02
-  - first:
-      4: 400012
-    second: fin.L
-  - first:
-      4: 400014
-    second: fin.R
-  - first:
-      4: 400016
-    second: Mesh
-  - first:
-      4: 400018
-    second: Rig
-  - first:
-      4: 400020
-    second: root
-  - first:
-      4: 400022
-    second: tail.01
-  - first:
-      21: 2100000
-    second: M_Arowana
-  - first:
-      43: 4300000
-    second: Mesh
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      137: 13700000
-    second: Mesh
+  internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Arowana
-    second: {fileID: 2100000, guid: b436fcc707bc8924a9175ec90504b034, type: 2}
+      name: Glass Imperfecftions Blue
+    second: {fileID: 2100000, guid: 4d35ff54d0bd21f41bb694ddb7fc7998, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Portal_Send001.001
+    second: {fileID: 2100000, guid: 27201a63808481e4b85d41310e743c60, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: T_Arowana
-    second: {fileID: 2800000, guid: 3082bdec100001542838d6036f54633b, type: 3}
+      name: Portal_Send001_D
+    second: {fileID: 2800000, guid: dd835876b0040bd4eb4931cfb94cb2b8, type: 3}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -124,7 +45,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -137,8 +58,8 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    nodeNameCollisionStrategy: 0
-    fileIdsGeneration: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -155,7 +76,7 @@ ModelImporter:
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
+    secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
@@ -191,10 +112,10 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  importBlendShapeDeformPercent: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
