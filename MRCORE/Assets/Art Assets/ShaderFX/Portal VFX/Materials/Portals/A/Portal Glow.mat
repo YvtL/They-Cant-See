@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Portal Glow
-  m_Shader: {fileID: -6465566751694194690, guid: fb115bbdbd99894468081ce4fe43ae20,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: fb115bbdbd99894468081ce4fe43ae20, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -138,11 +137,12 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Grid_Colour: {r: 8, g: 2, b: 1, a: 1}
     - _Grid_Colour_1: {r: 1, g: 1, b: 1, a: 1}
-    - _Position: {r: -0.6, g: 0, b: 0, a: 0}
-    - _Rotation: {r: -0, g: 0, b: 0, a: 0}
-    - _Scale: {r: 0.8, g: 1.2, b: 0.4, a: 0}
+    - _Position: {r: -1.03, g: 2.76, b: 8.1, a: 0}
+    - _Rotation: {r: -0, g: 180, b: 0, a: 0}
+    - _Scale: {r: 3.229861, g: 3.229861, b: 1.6149305, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &8221927889698533723
 MonoBehaviour:
   m_ObjectHideFlags: 11
