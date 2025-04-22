@@ -14,6 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Madhupriya_scene.unity
     guid: db20dab1f2d605642a5164fa3b8d2339
+  - enabled: 0
+    path: Assets/Scenes/ccol.unity
+    guid: d66b35847ed3e564abaa61dfc862f9ff
+  - enabled: 0
+    path: Assets/Scenes/ProfScenes/Rift.unity
+    guid: 83f4a3dad40f8c14e81773520e9250ae
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
