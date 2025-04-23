@@ -7,7 +7,8 @@ using UnityEngine.XR.ARFoundation;
 public class HandSpread : MonoBehaviour
 {
     //public TextMeshPro text;
-    readonly float spreadThreshold = 0.075f; // Minimum distance between fingers
+    readonly float spreadThreshold = 0.05f; // Minimum distance between fingers
+    //readonly float spreadThreshold = 0.075f; 
     XRHandSubsystem handSubsystem;
     MakeRift makeRift;
 
