@@ -769,6 +769,7 @@ GameObject:
   - component: {fileID: 645841684}
   - component: {fileID: 645841683}
   - component: {fileID: 645841687}
+  - component: {fileID: 645841689}
   - component: {fileID: 645841688}
   m_Layer: 0
   m_Name: Monster
@@ -792,7 +793,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -875,7 +876,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645841682}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da8be08d231f9b049b9e9d1ffd61e257, type: 3}
   m_Name: 
@@ -904,6 +905,21 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &645841689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645841682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b553bd4e2df974927a76aa3f63f3e70a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  losePanel: {fileID: 0}
+  outlineMaterial: {fileID: 2100000, guid: cf592f0324c4ce949bedcbad20c8e46a, type: 2}
+  maxAnimalsAllowedToDie: 0
 --- !u!1 &663209809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,7 +2012,7 @@ GameObject:
   - component: {fileID: 1853247326}
   - component: {fileID: 1853247325}
   m_Layer: 0
-  m_Name: GameOverManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
