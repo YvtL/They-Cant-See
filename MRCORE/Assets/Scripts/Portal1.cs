@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Portal : MonoBehaviour
+public class Portal1 : MonoBehaviour
 {
     private GameManager gameManager;
     public ParticleSystem portalEffect;
