@@ -7,6 +7,7 @@ public class CatchingAnimals : MonoBehaviour
 {
     private NavMeshAgent navAgent;
     private Animator animator;
+    private MonsterAnimationController animController;
 
     public GameObject losePanel; // Assign in Inspector
     private GameObject currentTarget;
@@ -20,10 +21,20 @@ public class CatchingAnimals : MonoBehaviour
 
     private bool gameOver = false;
 
+    // The distance at which the monster will catch an animal
+    public float catchDistance = 1.5f;
+
     void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        // Check if the animation controller already exists before adding
+        animController = GetComponent<MonsterAnimationController>();
+        if (animController == null)
+        {
+            animController = gameObject.AddComponent<MonsterAnimationController>();
+        }
     }
 
     void Update()
@@ -35,6 +46,13 @@ public class CatchingAnimals : MonoBehaviour
         if (currentTarget != null)
         {
             navAgent.SetDestination(currentTarget.transform.position);
+
+            // Check if it's close enough to catch animal
+            float distanceToTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
+            if (distanceToTarget <= catchDistance)
+            {
+                CatchAnimal(currentTarget);
+            }
         }
     }
 
@@ -57,59 +75,45 @@ public class CatchingAnimals : MonoBehaviour
         return closest;
     }
 
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (gameOver || !other.CompareTag("Animal")) return;
-
-    //     animalsEaten++;
-    //     Destroy(other.gameObject); // Remove the animal
-
-    //     if (animator != null)
-    //     {
-    //         animator.SetTrigger("Eat"); // Trigger eating animation
-    //     }
-
-    //     if (animalsEaten >= maxAnimalsAllowedToDie)
-    //     {
-    //         gameOver = true;
-    //         navAgent.isStopped = true;
-    //         StartCoroutine(ShowLoseUI());
-    //     }
-    // }
-
-    void OnTriggerEnter(Collider other)
+    void CatchAnimal(GameObject animal)
     {
-    if (gameOver || !other.CompareTag("Animal")) return;
+        if (gameOver || animal == null) return;
 
-    Debug.Log("Monster touched an animal: " + other.gameObject.name);
+        Debug.Log("Monster caught an animal: " + animal.name);
 
-    animalsEaten++;
-    Destroy(other.gameObject); // Remove the animal
+        // Play the killing animation
+        if (animController != null)
+        {
+            animController.PlayKillAnimation(animal);
+        }
+        else
+        {
+            // Fallback if animation controller is missing
+            // Get the animal controller to play death animation
+            AnimalAnimationController animalController = animal.GetComponent<AnimalAnimationController>();
+            if (animalController != null)
+            {
+                animalController.Die();
+            }
+            else
+            {
+                // Direct destroy if no controller exists
+                Destroy(animal);
+            }
+        }
 
-    if (animator != null)
-    {
-        animator.SetTrigger("Eat"); // Trigger eating animation
+        animalsEaten++;
+
+        if (animalsEaten >= maxAnimalsAllowedToDie)
+        {
+            gameOver = true;
+            if (navAgent != null)
+            {
+                navAgent.isStopped = true;
+            }
+            StartCoroutine(ShowLoseUI());
+        }
     }
-
-    if (animalsEaten >= maxAnimalsAllowedToDie)
-    {
-        gameOver = true;
-        navAgent.isStopped = true;
-        StartCoroutine(ShowLoseUI());
-    }
-    }
-
-
-    // IEnumerator ShowLoseUI()
-    // {
-    //     yield return new WaitForSeconds(1.5f); // Optional delay for animation
-    //     if (losePanel != null)
-    //     {
-    //         losePanel.SetActive(true);
-    //     }
-
-    //     Time.timeScale = 0f; // Optional: pause game
-    // }
 
     IEnumerator ShowLoseUI()
     {
@@ -117,17 +121,19 @@ public class CatchingAnimals : MonoBehaviour
         SceneManager.LoadScene("Losing Scene");
     }
 
-
     void TargetAnimal(GameObject animal)
     {
         animalRenderer = animal.GetComponent<Renderer>();
-        originalMaterial = animalRenderer.material;
-        animalRenderer.material = outlineMaterial;
+        if (animalRenderer != null)
+        {
+            originalMaterial = animalRenderer.material;
+            animalRenderer.material = outlineMaterial;
+        }
     }
 
     void ClearTarget()
     {
-        if (animalRenderer != null)
+        if (animalRenderer != null && originalMaterial != null)
             animalRenderer.material = originalMaterial;
     }
 }

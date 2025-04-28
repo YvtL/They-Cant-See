@@ -1,129 +1,96 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
-using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    // Singleton pattern
+    public static GameManager Instance { get; private set; }
+
     [Header("Game Settings")]
-    public float gameDuration = 120f; // 2 minutes game time
-    public int targetAnimalsSaved = 5; // How many animals need to be saved to win
+    public int totalAnimalsToSave = 5;
+    public int maxAnimalsThatCanDie = 5;
 
-    [Header("Tags and References")]
-    public string animalTag = "Animal"; // Make sure this is consistent!
-    public GameObject portal;
+    [Header("References")]
+    public GameObject godPrefab; // The "god" entity that appears when you lose
+    public Transform playerCamera; // Reference to the VR camera/head
 
-    [Header("UI Elements")]
-    public TextMeshProUGUI animalCounterText;
-    public TextMeshProUGUI timerText;
-    public GameObject winPanel;
-    public GameObject losePanel;
-    public GameObject gameOverPanel;
-
-    // Internal variables
-    private float timeRemaining;
     private int animalsSaved = 0;
-    private bool gameEnded = false;
+    private int animalsDead = 0;
+    private bool gameOver = false;
 
-    void Start()
+    private void Awake()
     {
-        // Initialize game
-        timeRemaining = gameDuration;
-        winPanel.SetActive(false);
-        losePanel.SetActive(false);
-        gameOverPanel.SetActive(false);
-        UpdateAnimalCounter();
-    }
-
-    void Update()
-    {
-        if (gameEnded) return;
-
-        if (timeRemaining > 0)
+        // Singleton setup
+        if (Instance == null)
         {
-            timeRemaining -= Time.deltaTime;
-            UpdateTimerDisplay();
+            Instance = this;
         }
         else
         {
-            EndGame(false);
+            Destroy(gameObject);
         }
-
-        UpdateAnimalCounter();
     }
 
     public void AnimalSaved()
     {
+        if (gameOver) return;
+
         animalsSaved++;
+        Debug.Log($"Animal saved! {animalsSaved}/{totalAnimalsToSave}");
 
-        // Check win condition
-        if (animalsSaved >= targetAnimalsSaved)
+        if (animalsSaved >= totalAnimalsToSave)
         {
-            EndGame(true);
-        }
-
-        // Update UI
-        UpdateAnimalCounter();
-    }
-
-    public void AnimalEaten()
-    {
-        // Show lose message temporarily
-        StartCoroutine(ShowLoseMessage());
-    }
-
-    IEnumerator ShowLoseMessage()
-    {
-        losePanel.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        losePanel.SetActive(false);
-    }
-
-    void UpdateAnimalCounter()
-    {
-        int animalCount = GameObject.FindGameObjectsWithTag(animalTag).Length;
-
-        if (animalCounterText != null)
-        {
-            animalCounterText.text = $"Animals: {animalCount} | Saved: {animalsSaved}";
+            WinGame();
         }
     }
 
-    void UpdateTimerDisplay()
+    public void AnimalDied()
     {
-        if (timerText != null)
+        if (gameOver) return;
+
+        animalsDead++;
+        Debug.Log($"Animal died! {animalsDead}/{maxAnimalsThatCanDie}");
+
+        if (animalsDead >= maxAnimalsThatCanDie)
         {
-            int minutes = Mathf.FloorToInt(timeRemaining / 60);
-            int seconds = Mathf.FloorToInt(timeRemaining % 60);
-            timerText.text = $"Time: {minutes:00}:{seconds:00}";
+            LoseGame();
         }
     }
 
-    void EndGame(bool isWin)
+    private void WinGame()
     {
-        gameEnded = true;
+        gameOver = true;
+        Debug.Log("You won the game!");
 
-        if (isWin)
+        // Load win scene
+        SceneManager.LoadScene("Winning Scene");
+    }
+
+    private void LoseGame()
+    {
+        gameOver = true;
+        Debug.Log("You lost the game!");
+
+        // Spawn the "god" in front of the player
+        if (godPrefab != null && playerCamera != null)
         {
-            winPanel.SetActive(true);
+            Vector3 spawnPosition = playerCamera.position + playerCamera.forward * 3f;
+            GameObject god = Instantiate(godPrefab, spawnPosition, Quaternion.identity);
+
+            // Make the god face the player
+            god.transform.LookAt(playerCamera);
+
+            // Start the god's killing animation/sequence
+            GodBehavior godBehavior = god.GetComponent<GodBehavior>();
+            if (godBehavior != null)
+            {
+                godBehavior.KillPlayer();
+            }
         }
         else
         {
-            gameOverPanel.SetActive(true);
+            // If god or camera reference is missing, just load the lose scene
+            SceneManager.LoadScene("Losing Scene");
         }
-    }
-
-    public void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void QuitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 }
