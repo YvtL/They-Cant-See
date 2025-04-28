@@ -27,7 +27,7 @@ public class WinningPortal : MonoBehaviour
 
             if (animalsSaved >= animalsNeededToWin)
             {
-                LoadWinningScene();
+                SceneManager.LoadScene("Winning Scene");
             }
         }
     }

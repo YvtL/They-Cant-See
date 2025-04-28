@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ProfScenes/Rift.unity
     guid: 83f4a3dad40f8c14e81773520e9250ae
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/ProfScenes/Portal.unity
     guid: b2c62f2d4a01313439301136208c4f61
   - enabled: 1
@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Losing Scene.unity
     guid: 94390cff6c7c44f33bf9ed5b453787e0
+  - enabled: 1
+    path: Assets/Scenes/belinda 2.unity
+    guid: 9c63f6d3fdac64a308bafbc4243622a4
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
