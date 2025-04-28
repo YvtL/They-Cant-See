@@ -1253,6 +1253,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3987592757526693046, guid: bd4d9648e5410ad4a809ca419ad21632, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.891
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987592757526693046, guid: bd4d9648e5410ad4a809ca419ad21632, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.382
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897995211068431969, guid: bd4d9648e5410ad4a809ca419ad21632, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.891
+      objectReference: {fileID: 0}
+    - target: {fileID: 5897995211068431969, guid: bd4d9648e5410ad4a809ca419ad21632, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.0139999
+      objectReference: {fileID: 0}
     - target: {fileID: 7883033429634384325, guid: bd4d9648e5410ad4a809ca419ad21632, type: 3}
       propertyPath: hoverSprite
       value: 

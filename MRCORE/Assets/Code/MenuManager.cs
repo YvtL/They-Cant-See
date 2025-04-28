@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.XR;
 public class MenuManager : MonoBehaviour
 {
-    int rayCastDistance = 20;
+    int rayCastDistance = 35;
     public LayerMask UILayer;
     Transform pointer;
     Transform target;
