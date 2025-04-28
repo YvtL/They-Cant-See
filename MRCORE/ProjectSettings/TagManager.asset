@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Animal
   - animal
+  - Pointer
   layers:
   - Default
   - TransparentFX
