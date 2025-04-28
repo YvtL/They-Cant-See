@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.XR;
 public class MenuManager : MonoBehaviour
 {
-    int rayCastDistance = 10;
+    int rayCastDistance = 20;
     public LayerMask UILayer;
     Transform pointer;
     Transform target;
@@ -26,13 +26,28 @@ public class MenuManager : MonoBehaviour
                target.SendMessage("ClickAction");
                if (target.name == "Button1")
                {
-                //do something
+                UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
                }
                else if (target.name == "Button2")
                {
-                //do something
+                Application.Quit();
                }
             }
         }
     }
+    void FixedUpdate()
+{
+    if (Physics.Raycast(pointer.position, pointer.forward, out RaycastHit hit, rayCastDistance, UILayer))
+    {
+        target = hit.transform;
+        target.SendMessage("HoverAction", true);
+    }
+    else if (target != null)
+    {
+        target.SendMessage("HoverAction", false);
+        target = null;
+    }
 }
+}
+
+
