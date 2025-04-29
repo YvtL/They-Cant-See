@@ -1,5 +1,3 @@
-using System.Reflection;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.XR;
 public class MenuManager : MonoBehaviour
