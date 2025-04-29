@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3551736094056901788}
   - component: {fileID: 8227162193532909142}
   - component: {fileID: 1462903050154347915}
+  - component: {fileID: -5658191750874836451}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -222,3 +223,17 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-5658191750874836451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5880156311257912417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af4fc566bb024e89821d3c34e6bba97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalsNeededToWin: 3
+  animalsSavedText: {fileID: 0}
