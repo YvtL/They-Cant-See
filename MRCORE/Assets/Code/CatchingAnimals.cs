@@ -75,45 +75,96 @@ public class CatchingAnimals : MonoBehaviour
         return closest;
     }
 
-    void CatchAnimal(GameObject animal)
+void CatchAnimal(GameObject animal)
+{
+    if (gameOver || animal == null) return;
+
+    Debug.Log("Monster caught an animal: " + animal.name);
+
+    // Immediately "lock" catching
+    navAgent.isStopped = true;
+
+    if (animController != null)
     {
-        if (gameOver || animal == null) return;
-
-        Debug.Log("Monster caught an animal: " + animal.name);
-
-        // Play the killing animation
-        if (animController != null)
+        animController.PlayKillAnimation(animal);
+    }
+    else
+    {
+        AnimalAnimationController animalController = animal.GetComponent<AnimalAnimationController>();
+        if (animalController != null)
         {
-            animController.PlayKillAnimation(animal);
+            animalController.Die();
         }
         else
         {
-            // Fallback if animation controller is missing
-            // Get the animal controller to play death animation
-            AnimalAnimationController animalController = animal.GetComponent<AnimalAnimationController>();
-            if (animalController != null)
-            {
-                animalController.Die();
-            }
-            else
-            {
-                // Direct destroy if no controller exists
-                Destroy(animal);
-            }
-        }
-
-        animalsEaten++;
-
-        if (animalsEaten >= maxAnimalsAllowedToDie)
-        {
-            gameOver = true;
-            if (navAgent != null)
-            {
-                navAgent.isStopped = true;
-            }
-            StartCoroutine(ShowLoseUI());
+            Destroy(animal);
         }
     }
+
+    animalsEaten++;
+
+    // Very important: Only check for game over AFTER animal was processed
+    if (animalsEaten >= maxAnimalsAllowedToDie)
+    {
+        gameOver = true;
+        StartCoroutine(ShowLoseUI());
+    }
+    else
+    {
+        // Resume movement AFTER killing animation (optional small delay here if you want realism)
+        StartCoroutine(ResumeChasing());
+    }
+}
+
+IEnumerator ResumeChasing()
+{
+    yield return new WaitForSeconds(1f); // Wait a moment so monster doesn't immediately eat another
+    if (!gameOver && navAgent != null)
+    {
+        navAgent.isStopped = false;
+    }
+}
+
+
+    // void CatchAnimal(GameObject animal)
+    // {
+    //     if (gameOver || animal == null) return;
+
+    //     Debug.Log("Monster caught an animal: " + animal.name);
+
+    //     // Play the killing animation
+    //     if (animController != null)
+    //     {
+    //         animController.PlayKillAnimation(animal);
+    //     }
+    //     else
+    //     {
+    //         // Fallback if animation controller is missing
+    //         // Get the animal controller to play death animation
+    //         AnimalAnimationController animalController = animal.GetComponent<AnimalAnimationController>();
+    //         if (animalController != null)
+    //         {
+    //             animalController.Die();
+    //         }
+    //         else
+    //         {
+    //             // Direct destroy if no controller exists
+    //             Destroy(animal);
+    //         }
+    //     }
+
+    //     animalsEaten++;
+
+    //     if (animalsEaten >= maxAnimalsAllowedToDie)
+    //     {
+    //         gameOver = true;
+    //         if (navAgent != null)
+    //         {
+    //             navAgent.isStopped = true;
+    //         }
+    //         StartCoroutine(ShowLoseUI());
+    //     }
+    // }
 
     IEnumerator ShowLoseUI()
     {
